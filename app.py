@@ -27,4 +27,4 @@ def index():
 if __name__ == '__main__':
     with app.app_context():
         index()
-        app.run()
+        app.run(port=1000)
