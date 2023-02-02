@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+import gunicorn
 #
 app = Flask(__name__)
 #
@@ -29,3 +30,25 @@ if __name__ == '__main__':
         index()
         # app.run(port=1000)
         app.run()
+
+# export FLASK_RUN_PORT=1000; flask run
+'''
+method 1: in app.py (not work)
+    app.run(port=1000)
+
+method 2: in render, deploy (not work)
+    flask run --port=1000
+
+methos 3: in render, deploy (not work)
+    #!/bin/bash
+    export FLASK_RUN_PORT=1000
+    flask run
+    # run_flask.sh
+    # chmod +x run_flask.sh
+    # ./run_flask.sh
+
+methos 3: in render env and deploy
+    set enviroment for connection in render, add
+        DATABASE_URL=postgresql://stevegau:pCdaBZ1ehnzaSkF4sQFYgPRWQSWoVl6x@dpg-cfc9gbun6mpiero1lsbg-a/students_0h01
+    gunicorn app:app
+'''
